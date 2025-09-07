@@ -99,11 +99,9 @@ const HomePage = () => {
             
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-bold">Discovery Flow</h2>
-              <span className="text-sm text-gray-400">Recommendations</span>
+              <h2 className="text-lg font-bold text-gray-500">Top Charts</h2>
             </div>
-            
-            
+                        
             
             {/* More Tracks - Now clickable with selection */}
             <div className="space-y-3">
