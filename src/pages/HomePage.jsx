@@ -12,7 +12,7 @@ const HomePage = () => {
         {/* Main Content - Left Side */}
         <div className="flex-1">
           
-          {/* Hero Section - Much Bigger */}
+          {/* Hero Section */}
           <section className="mb-8">
             <div className="relative bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 rounded-2xl p-8 flex flex-col justify-end h-80 overflow-hidden">
               
@@ -38,47 +38,43 @@ const HomePage = () => {
               </div>
               
               <div className="relative z-10">
-                <h3 className="text-3xl font-bold mb-2">Neon Waves</h3>
-                <p className="text-lg text-gray-200">Cybernetic Soul</p>
+                <h3 className="text-3xl font-bold mb-2">Blinding Lights</h3>
+                <p className="text-lg text-gray-200">The Weeknd</p>
               </div>
             </div>
           </section>
 
-          {/* Your Vibe Section - Different Card Sizes */}
+          {/* Your Vibe Section */}
           <section className="mb-8">
             <h2 className="text-xl font-bold mb-4">Your Vibe</h2>
             <div className="grid grid-cols-4 gap-4">
-              {/* Large card spans 2 columns */}
-              <div className="col-span-2">
-                <div className="h-48">
-                  <MusicCard title="Chill Flow" subtitle="Lofi beats to relax" />
+              {[
+                { title: "Ocean Eyes", subtitle: "Billie Eilish" },
+                { title: "Lose Yourself", subtitle: "Eminem" },
+                { title: "Shape of You", subtitle: "Ed Sheeran" },
+                { title: "Heat Waves", subtitle: "Glass Animals" },
+                { title: "Levitating", subtitle: "Dua Lipa" },
+                { title: "Starboy", subtitle: "The Weeknd ft. Daft Punk" },
+                { title: "Bad Guy", subtitle: "Billie Eilish" },
+                { title: "Sunflower", subtitle: "Post Malone & Swae Lee" }
+              ].map((card, i) => (
+                <div key={i} className="h-48">
+                  <MusicCard title={card.title} subtitle={card.subtitle} />
                 </div>
-              </div>
-              
-              {/* Two small cards on right */}
-              <div className="col-span-1">
-                <div className="h-48">
-                  <MusicCard title="Discovery Flow" subtitle="New tracks for you" />
-                </div>
-              </div>
-              <div className="col-span-1">
-                <div className="h-48">
-                  <MusicCard title="Indie Mood" subtitle="Acoustic vibes" />
-                </div>
-              </div>
+              ))}
             </div>
           </section>
 
-          {/* Artists Row */}
+          {/* Featured Artists Row */}
           <section className="mb-8">
             <h2 className="text-xl font-bold mb-4">Featured Artists</h2>
             <div className="flex space-x-6 overflow-x-auto pb-4">
               {[
-                { name: "Neon Dreams", color: "from-purple-500 to-pink-500" },
-                { name: "Cyber Soul", color: "from-blue-500 to-cyan-500" },
-                { name: "Wave Rider", color: "from-green-500 to-teal-500" },
-                { name: "Echo Beat", color: "from-orange-500 to-red-500" },
-                { name: "Pulse Master", color: "from-indigo-500 to-purple-500" }
+                { name: "The Weeknd", color: "from-purple-500 to-pink-500" },
+                { name: "Billie Eilish", color: "from-blue-500 to-cyan-500" },
+                { name: "Ed Sheeran", color: "from-green-500 to-teal-500" },
+                { name: "Dua Lipa", color: "from-orange-500 to-red-500" },
+                { name: "Post Malone", color: "from-indigo-500 to-purple-500" }
               ].map((artist, index) => (
                 <div key={index} className="flex-shrink-0 text-center group cursor-pointer">
                   <div className={`w-20 h-20 bg-gradient-to-br ${artist.color} rounded-full mx-auto mb-3 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center`}>
@@ -102,15 +98,14 @@ const HomePage = () => {
               <h2 className="text-lg font-bold text-gray-500">Top Charts</h2>
             </div>
                         
-            
-            {/* More Tracks - Now clickable with selection */}
+            {/* More Tracks */}
             <div className="space-y-3">
               {[
-                { id: 'orchide', title: "Orchide Soul", artist: "Digital Dreams", color: "from-blue-500 to-cyan-500", initials: "OS" },
-                { id: 'neon', title: "Neon Nights", artist: "Digital Dreams", color: "from-blue-500 to-cyan-500", initials: "NN" },
-                { id: 'electric', title: "Electric Pulse", artist: "Retro Wave", color: "from-purple-500 to-pink-500", initials: "EP" },
-                { id: 'cyber', title: "Cyber Love", artist: "Future Soul", color: "from-green-500 to-teal-500", initials: "CL" },
-                { id: 'space', title: "Space Echo", artist: "Cosmic Beat", color: "from-orange-500 to-red-500", initials: "SE" }
+                { id: 'shape', title: "Shape of You", artist: "Ed Sheeran", color: "from-blue-500 to-cyan-500", initials: "SY" },
+                { id: 'badguy', title: "Bad Guy", artist: "Billie Eilish", color: "from-green-500 to-teal-500", initials: "BG" },
+                { id: 'stay', title: "Stay", artist: "The Kid LAROI & Justin Bieber", color: "from-purple-500 to-pink-500", initials: "ST" },
+                { id: 'uptown', title: "Uptown Funk", artist: "Mark Ronson ft. Bruno Mars", color: "from-orange-500 to-red-500", initials: "UF" },
+                { id: 'sunflower', title: "Sunflower", artist: "Post Malone & Swae Lee", color: "from-indigo-500 to-purple-500", initials: "SF" }
               ].map((track) => (
                 <div 
                   key={track.id}
@@ -137,7 +132,7 @@ const HomePage = () => {
                     <p className="text-xs text-gray-400">{track.artist}</p>
                   </div>
                   
-                  {/* Selection indicator - shows only when selected */}
+                  {/* Selection indicator */}
                   {selectedDiscovery === track.id && (
                     <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
                   )}

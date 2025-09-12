@@ -5,21 +5,21 @@ import MusicCard from "../components/MusicCard";
 const LibraryPage = () => {
   const [activeTab, setActiveTab] = useState("recent");
 
-  // Mock user library data
+  // User library data (real artist names + songs)
   const recentlyPlayed = [
-    { id: 'neon-waves', title: "Neon Waves", artist: "Cybernetic Soul", lastPlayed: "2 hours ago", plays: 23 },
-    { id: 'electric-pulse', title: "Electric Pulse", artist: "Digital Dreams", lastPlayed: "5 hours ago", plays: 15 },
-    { id: 'cyber-love', title: "Cyber Love", artist: "Future Soul", lastPlayed: "1 day ago", plays: 31 },
-    { id: 'space-echo', title: "Space Echo", artist: "Cosmic Beat", lastPlayed: "2 days ago", plays: 8 },
-    { id: 'neon-nights', title: "Neon Nights", artist: "Retro Wave", lastPlayed: "3 days ago", plays: 42 }
+    { id: 'blinding-lights', title: "Blinding Lights", artist: "The Weeknd", lastPlayed: "2 hours ago", plays: 23 },
+    { id: 'shape-of-you', title: "Shape of You", artist: "Ed Sheeran", lastPlayed: "5 hours ago", plays: 15 },
+    { id: 'levitating', title: "Levitating", artist: "Dua Lipa", lastPlayed: "1 day ago", plays: 31 },
+    { id: 'bad-guy', title: "Bad Guy", artist: "Billie Eilish", lastPlayed: "2 days ago", plays: 8 },
+    { id: 'uptown-funk', title: "Uptown Funk", artist: "Mark Ronson ft. Bruno Mars", lastPlayed: "3 days ago", plays: 42 }
   ];
 
   const likedSongs = [
-    { id: 'midnight-drive', title: "Midnight Drive", artist: "Night Rider", genre: "Outrun", duration: "4:23" },
-    { id: 'chrome-heart', title: "Chrome Heart", artist: "Metal Wave", genre: "Synthwave", duration: "3:45" },
-    { id: 'laser-grid', title: "Laser Grid", artist: "Grid Runner", genre: "Electronic", duration: "5:12" },
-    { id: 'cyber-rain', title: "Cyber Rain", artist: "Neo Tokyo", genre: "Ambient", duration: "6:07" },
-    { id: 'voltage-high', title: "Voltage High", artist: "Electric Storm", genre: "Electronic", duration: "3:58" }
+    { id: 'save-your-tears', title: "Save Your Tears", artist: "The Weeknd", genre: "Pop", duration: "3:35" },
+    { id: 'perfect', title: "Perfect", artist: "Ed Sheeran", genre: "Pop", duration: "4:23" },
+    { id: 'dont-start-now', title: "Don’t Start Now", artist: "Dua Lipa", genre: "Disco-pop", duration: "3:03" },
+    { id: 'happier-than-ever', title: "Happier Than Ever", artist: "Billie Eilish", genre: "Alternative", duration: "4:58" },
+    { id: 'treasure', title: "Treasure", artist: "Bruno Mars", genre: "Funk", duration: "3:00" }
   ];
 
   const playlists = [

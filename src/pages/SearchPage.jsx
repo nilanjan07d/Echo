@@ -7,30 +7,30 @@ const SearchPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
 
-  // Mock database of all available tracks
+  // Real-world track database
   const allTracks = [
-    { id: 'neon-pulse', title: "Neon Pulse", artist: "Cyber Dreams", genre: "Synthwave" },
-    { id: 'electric-nights', title: "Electric Nights", artist: "Retro Wave", genre: "Electronic" },
-    { id: 'space-echo', title: "Space Echo", artist: "Cosmic Beat", genre: "Ambient" },
-    { id: 'digital-love', title: "Digital Love", artist: "Future Soul", genre: "Synthpop" },
-    { id: 'neon-dreams', title: "Neon Dreams", artist: "Cyber Soul", genre: "Synthwave" },
-    { id: 'midnight-drive', title: "Midnight Drive", artist: "Night Rider", genre: "Outrun" },
-    { id: 'chrome-heart', title: "Chrome Heart", artist: "Metal Wave", genre: "Synthwave" },
-    { id: 'laser-grid', title: "Laser Grid", artist: "Grid Runner", genre: "Electronic" },
-    { id: 'cyber-rain', title: "Cyber Rain", artist: "Neo Tokyo", genre: "Ambient" },
-    { id: 'voltage-high', title: "Voltage High", artist: "Electric Storm", genre: "Electronic" }
+    { id: 'blinding-lights', title: "Blinding Lights", artist: "The Weeknd", genre: "Pop" },
+    { id: 'shape-of-you', title: "Shape of You", artist: "Ed Sheeran", genre: "Pop" },
+    { id: 'bad-guy', title: "Bad Guy", artist: "Billie Eilish", genre: "Alternative" },
+    { id: 'levitating', title: "Levitating", artist: "Dua Lipa", genre: "Pop" },
+    { id: 'stay', title: "Stay", artist: "The Kid LAROI, Justin Bieber", genre: "Pop" },
+    { id: 'creep', title: "Creep", artist: "Radiohead", genre: "Rock" },
+    { id: 'lose-yourself', title: "Lose Yourself", artist: "Eminem", genre: "Hip-Hop" },
+    { id: 'hotel-california', title: "Hotel California", artist: "Eagles", genre: "Rock" },
+    { id: 'bohemian-rhapsody', title: "Bohemian Rhapsody", artist: "Queen", genre: "Classic Rock" },
+    { id: 'rolling-in-the-deep', title: "Rolling in the Deep", artist: "Adele", genre: "Pop" }
   ];
 
-  // Trending searches (shown when no search query)
+  // Trending searches (popular genres)
   const trendingSearches = [
-    "Synthwave", "Cyberpunk", "Retro Wave", "Ambient", "Electronic", "Neon"
+    "Pop", "Hip-Hop", "Rock", "Indie", "EDM", "Classic Rock"
   ];
 
   // Search function
   const handleSearch = (query) => {
     setSearchQuery(query);
     setIsSearching(true);
-    
+
     if (query.trim() === "") {
       setSearchResults([]);
       setIsSearching(false);
@@ -65,7 +65,7 @@ const SearchPage = () => {
       {/* Search Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold mb-6 text-white">Search</h1>
-        
+
         {/* Search Input */}
         <div className="relative max-w-md">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -95,7 +95,7 @@ const SearchPage = () => {
           <h2 className="text-xl font-bold mb-4 text-white">
             Search Results for "{searchQuery}" ({searchResults.length} found)
           </h2>
-          
+
           {isSearching ? (
             <div className="text-center py-8">
               <div className="animate-pulse text-gray-400">Searching...</div>
@@ -146,12 +146,12 @@ const SearchPage = () => {
             <h2 className="text-xl font-bold mb-4 text-white">Browse by Genre</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {[
-                { name: "Synthwave", color: "from-purple-500 to-pink-500", tracks: "245 tracks" },
-                { name: "Electronic", color: "from-blue-500 to-cyan-500", tracks: "189 tracks" },
-                { name: "Ambient", color: "from-green-500 to-teal-500", tracks: "156 tracks" },
-                { name: "Synthpop", color: "from-orange-500 to-red-500", tracks: "98 tracks" },
-                { name: "Outrun", color: "from-indigo-500 to-purple-500", tracks: "127 tracks" },
-                { name: "Cyberpunk", color: "from-pink-500 to-rose-500", tracks: "203 tracks" }
+                { name: "Pop", color: "from-pink-500 to-purple-500", tracks: "245 tracks" },
+                { name: "Hip-Hop", color: "from-yellow-500 to-red-500", tracks: "189 tracks" },
+                { name: "Rock", color: "from-blue-500 to-indigo-500", tracks: "156 tracks" },
+                { name: "Indie", color: "from-green-500 to-teal-500", tracks: "98 tracks" },
+                { name: "EDM", color: "from-cyan-500 to-blue-500", tracks: "127 tracks" },
+                { name: "Classic Rock", color: "from-orange-500 to-red-500", tracks: "203 tracks" }
               ].map((genre, index) => (
                 <button
                   key={index}
@@ -162,7 +162,7 @@ const SearchPage = () => {
                     <h3 className="text-lg font-bold mb-1">{genre.name}</h3>
                     <p className="text-sm opacity-90">{genre.tracks}</p>
                   </div>
-                  
+
                   {/* Decorative circles */}
                   <div className="absolute -top-4 -right-4 w-20 h-20 bg-white/10 rounded-full group-hover:scale-110 transition-transform duration-300"></div>
                   <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-white/5 rounded-full group-hover:scale-110 transition-transform duration-300"></div>
@@ -171,7 +171,7 @@ const SearchPage = () => {
             </div>
           </section>
 
-          {/* Recently Searched */}
+          {/* Discover Music */}
           <section>
             <h2 className="text-xl font-bold mb-4 text-white">Discover Music</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">

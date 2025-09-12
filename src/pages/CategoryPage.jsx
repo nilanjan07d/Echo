@@ -16,24 +16,25 @@ const CategoryPage = () => {
     { id: "events", name: "Events", icon: Calendar, color: "from-gray-500 to-blue-500" }
   ];
 
-  // Sample content for each category
-  const categoryContent = {
-    music: [
-      { title: "Top Hits 2024", subtitle: "Popular tracks", image: "" },
-      { title: "Chill Vibes", subtitle: "Relaxing music", image: "" },
-      { title: "Workout Mix", subtitle: "Energy boost", image: "" }
-    ],
-    podcasts: [
-      { title: "Tech Talk Daily", subtitle: "Technology news", image: "" },
-      { title: "True Crime Stories", subtitle: "Mystery & investigation", image: "" },
-      { title: "Health & Wellness", subtitle: "Self improvement", image: "" }
-    ],
-    audiobooks: [
-      { title: "Best Sellers", subtitle: "Popular books", image: "" },
-      { title: "Self Help", subtitle: "Personal growth", image: "" },
-      { title: "Fiction", subtitle: "Storytelling", image: "" }
-    ]
-  };
+  // Inside categoryContent
+      const categoryContent = {
+        music: [
+          { title: "Blinding Lights", subtitle: "The Weeknd", image: "/assets/artists/theweeknd.jpg" },
+          { title: "As It Was", subtitle: "Harry Styles", image: "/assets/artists/harrystyles.jpg" },
+          { title: "Flowers", subtitle: "Miley Cyrus", image: "/assets/artists/mileycyrus.jpg" }
+        ],
+        podcasts: [
+          { title: "The Daily", subtitle: "The New York Times", image: "/assets/podcasts/thedaily.jpg" },
+          { title: "Huberman Lab", subtitle: "Dr. Andrew Huberman", image: "/assets/podcasts/huberman.jpg" },
+          { title: "Serial", subtitle: "True Crime Stories", image: "/assets/podcasts/serial.jpg" }
+        ],
+        audiobooks: [
+          { title: "Becoming", subtitle: "Michelle Obama", image: "/assets/audiobooks/becoming.jpg" },
+          { title: "Atomic Habits", subtitle: "James Clear", image: "/assets/audiobooks/atomichabits.jpg" },
+          { title: "Harry Potter and the Sorcerer’s Stone", subtitle: "J.K. Rowling", image: "/assets/audiobooks/harrypotter.jpg" }
+        ]
+      };
+
 
   const currentCategory = categories.find(cat => cat.id === selectedCategory);
   const IconComponent = currentCategory?.icon || Music;

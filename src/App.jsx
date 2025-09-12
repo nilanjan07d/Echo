@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TopBar from "./components/TopBar";
-import BottomNav from "./components/BottomNav";
+import BottomNav from "./components/Bottomnav";
 import PlayerBar from "./components/PlayerBar";
 import Sidebar from "./components/Sidebar";
 import HomePage from "./pages/Homepage";
@@ -27,7 +27,7 @@ const App = () => {
             {currentPage === "home" && <HomePage />}
             {currentPage === "search" && <SearchPage />}
             {currentPage === "library" && <LibraryPage />}
-            {currentPage === "categories" && <CategoryPage />}  {/* Fixed this line */}
+            {currentPage === "categories" && <CategoryPage />} 
           </main>
         )}
       </div>
