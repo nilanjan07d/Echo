@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import MusicCard from "../components/MusicCard";
 
+// Import all audio files from src/assets
+import shapeOfYou from "../assets/shape_of_you.mp3";
+import oceanEyes from "../assets/ocean_eyes.mp3";
+import loseYourself from "../assets/lose_yourself.mp3";
+import heatWaves from "../assets/heat_waves.mp3";
+import levitating from "../assets/levitating.mp3";
+import starboy from "../assets/starboy.mp3";
+import badGuy from "../assets/bad_guy.mp3";
+import sunflower from "../assets/sunflower.mp3";
+
 const HomePage = () => {
   const [selectedDiscovery, setSelectedDiscovery] = useState(null);
 
@@ -32,7 +42,15 @@ const HomePage = () => {
               
               {/* Play Button */}
               <div className="absolute top-6 right-6">
-                <button className="w-14 h-14 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 group">
+                <button 
+                  className="w-14 h-14 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 group"
+                  onClick={() => PlayerState.playTrack({
+                    id: 'blinding',
+                    title: "Blinding Lights",
+                    subtitle: "The Weeknd",
+                    audio: blindingLights
+                  })}
+                >
                   <div className="w-0 h-0 border-l-[10px] border-l-white border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ml-1 group-hover:scale-110 transition-transform"></div>
                 </button>
               </div>
@@ -49,25 +67,20 @@ const HomePage = () => {
             <h2 className="text-xl font-bold mb-4">Your Vibe</h2>
             <div className="grid grid-cols-4 gap-4">
               {[
-                { id: 1, title: "Ocean Eyes", subtitle: "Billie Eilish" },
-                { id: 2, title: "Lose Yourself", subtitle: "Eminem" },
-                { id: 3, title: "Shape of You", subtitle: "Ed Sheeran" },
-                { id: 4, title: "Heat Waves", subtitle: "Glass Animals" },
-                { id: 5, title: "Levitating", subtitle: "Dua Lipa" },
-                { id: 6, title: "Starboy", subtitle: "The Weeknd ft. Daft Punk" },
-                { id: 7, title: "Bad Guy", subtitle: "Billie Eilish" },
-                { id: 8, title: "Sunflower", subtitle: "Post Malone & Swae Lee" }
-              ].map((card, i) => (
-                <div key={i} className="h-48">
+                { id: 1, title: "Ocean Eyes", subtitle: "Billie Eilish", audio: oceanEyes },
+                { id: 2, title: "Lose Yourself", subtitle: "Eminem", audio: loseYourself },
+                { id: 3, title: "Shape of You", subtitle: "Ed Sheeran", audio: shapeOfYou },
+                { id: 4, title: "Heat Waves", subtitle: "Glass Animals", audio: heatWaves },
+                { id: 5, title: "Levitating", subtitle: "Dua Lipa", audio: levitating },
+                { id: 6, title: "Starboy", subtitle: "The Weeknd ft. Daft Punk", audio: starboy },
+                { id: 7, title: "Bad Guy", subtitle: "Billie Eilish", audio: badGuy },
+                { id: 8, title: "Sunflower", subtitle: "Post Malone & Swae Lee", audio: sunflower }
+              ].map((card) => (
+                <div key={card.id} className="h-48">
                   <MusicCard 
                     title={card.title} 
                     subtitle={card.subtitle} 
-                    track={{
-                      id: card.id,
-                      title: card.title,
-                      artist: card.subtitle,
-                      // Add any other track properties your PlayerState needs
-                    }}
+                    track={card}
                   />
                 </div>
               ))}
@@ -110,11 +123,9 @@ const HomePage = () => {
             {/* More Tracks */}
             <div className="space-y-3">
               {[
-                { id: 'shape', title: "Shape of You", artist: "Ed Sheeran", color: "from-blue-500 to-cyan-500", initials: "SY" },
-                { id: 'badguy', title: "Bad Guy", artist: "Billie Eilish", color: "from-green-500 to-teal-500", initials: "BG" },
-                { id: 'stay', title: "Stay", artist: "The Kid LAROI & Justin Bieber", color: "from-purple-500 to-pink-500", initials: "ST" },
-                { id: 'uptown', title: "Uptown Funk", artist: "Mark Ronson ft. Bruno Mars", color: "from-orange-500 to-red-500", initials: "UF" },
-                { id: 'sunflower', title: "Sunflower", artist: "Post Malone & Swae Lee", color: "from-indigo-500 to-purple-500", initials: "SF" }
+                { id: 'shape', title: "Shape of You", artist: "Ed Sheeran", color: "from-blue-500 to-cyan-500", initials: "SY", audio: shapeOfYou },
+                { id: 'badguy', title: "Bad Guy", artist: "Billie Eilish", color: "from-green-500 to-teal-500", initials: "BG", audio: badGuy },
+                { id: 'sunflower', title: "Sunflower", artist: "Post Malone & Swae Lee", color: "from-indigo-500 to-purple-500", initials: "SF", audio: sunflower }
               ].map((track) => (
                 <div 
                   key={track.id}
@@ -123,7 +134,10 @@ const HomePage = () => {
                       ? 'bg-white/10 border border-white/20 shadow-md' 
                       : 'hover:bg-white/5'
                   }`}
-                  onClick={() => setSelectedDiscovery(track.id)}
+                  onClick={() => {
+                    setSelectedDiscovery(track.id);
+                    PlayerState.playTrack(track);
+                  }}
                 >
                   <div className={`w-10 h-10 bg-gradient-to-br ${track.color} rounded-lg flex items-center justify-center transition-transform ${
                     selectedDiscovery === track.id ? 'scale-110' : ''

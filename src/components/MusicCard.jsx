@@ -7,8 +7,6 @@ const MusicCard = ({ title, subtitle, image, track }) => {
   const [isCurrentlyPlaying, setIsCurrentlyPlaying] = useState(false);
 
   useEffect(() => {
-    console.log('MusicCard mounted for:', title, 'with track:', track);
-    
     const checkIfPlaying = setInterval(() => {
       const currentSong = PlayerState.getCurrentTrack();
       const isPlayerPlaying = PlayerState.getIsPlaying();
@@ -21,53 +19,24 @@ const MusicCard = ({ title, subtitle, image, track }) => {
     }, 100); 
 
     return () => clearInterval(checkIfPlaying);
-  }, [track?.id, title]); 
+  }, [track?.id]); 
 
   const handlePlayClick = (e) => {
     e.stopPropagation();
-    console.log('Play button clicked for:', title, track);
-    
-    if (!track) {
-      console.error('No track object provided to MusicCard');
-      alert('Error: No track data available');
-      return;
+    if (track.audio) {
+      PlayerState.playTrack(track); 
+    } else {
+      console.log("Audio file not available for this track");
     }
-    
-    PlayerState.playTrack(track); 
   };
 
   const handleCardClick = () => {
-    console.log('Card clicked for:', title, track);
-    
-    if (!track) {
-      console.error('No track object provided to MusicCard');
-      alert('Error: No track data available');
-      return;
+    if (track.audio) {
+      PlayerState.playTrack(track); 
+    } else {
+      console.log("Audio file not available for this track");
     }
-    
-    PlayerState.playTrack(track); 
   };
-
-  // Check if audio file exists when component mounts
-  useEffect(() => {
-    if (track) {
-      PlayerState.testAudioFile(track).then(exists => {
-        if (!exists) {
-          console.warn(`Audio file missing for: ${title}`);
-        }
-      });
-    }
-  }, [track, title]);
-
-  const getVideoSource = () => {
-    if (title) {
-      const fileName = title.toLowerCase().replace(/\s+/g, '_') + '.mp4';
-      return `/assets/${fileName}`;
-    }
-    return null;
-  };
-
-  const videoSource = getVideoSource();
 
   return (
     <div 
@@ -75,45 +44,15 @@ const MusicCard = ({ title, subtitle, image, track }) => {
         isCurrentlyPlaying 
           ? 'border-purple-500/50 shadow-purple-500/20 scale-105' 
           : 'border-gray-700/30 hover:shadow-purple-500/20 hover:scale-[1.02]'
-      }`}
-      onMouseEnter={() => setIsHovered(true)}  
-      onMouseLeave={() => setIsHovered(false)} 
+      } ${!track.audio ? 'opacity-70 cursor-not-allowed' : ''}`}
+      onMouseEnter={() => track.audio && setIsHovered(true)}  
+      onMouseLeave={() => track.audio && setIsHovered(false)} 
       onClick={handleCardClick} 
     >
       
       <div className="w-full h-32 bg-gradient-to-br from-purple-500 via-pink-500 to-blue-500 rounded-lg mb-3 relative overflow-hidden">
-        {videoSource ? (
-          <video 
-            src={videoSource}
-            className="w-full h-full object-cover"
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            onError={(e) => {
-              console.warn(`Video not found: ${videoSource}`);
-              e.target.style.display = 'none';
-            }}
-            onLoadedData={() => {
-              console.log(`Video loaded: ${videoSource}`);
-            }}
-          />
-        ) : null}
-        
         {image && (
-          <img 
-            src={image} 
-            alt={title} 
-            className="w-full h-full object-cover"
-            style={{
-              display: videoSource ? 'none' : 'block'
-            }}
-            onError={(e) => {
-              if (videoSource) {
-                e.target.style.display = 'block';
-              }
-            }}
-          />
+          <img src={image} alt={title} className="w-full h-full object-cover" />
         )}
         
         {!isCurrentlyPlaying && (
@@ -136,15 +75,14 @@ const MusicCard = ({ title, subtitle, image, track }) => {
           </div>
         )}
 
-        {/* Debug indicator */}
-        {!track && (
-          <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
-            NO TRACK
+        {!track.audio && (
+          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+            <span className="text-white text-xs font-medium">No audio</span>
           </div>
         )}
       </div>
       
-      {isHovered && (
+      {isHovered && track.audio && (
         <button 
           onClick={handlePlayClick}
           className="absolute top-2 right-2 bg-gradient-to-r from-[#7637ff] to-[#e600ff] text-white p-2 rounded-full shadow-lg hover:scale-110 transition-transform"
@@ -155,10 +93,9 @@ const MusicCard = ({ title, subtitle, image, track }) => {
 
       <h3 className={`font-semibold truncate transition-colors ${
         isCurrentlyPlaying ? 'text-purple-300' : 'text-white'
-      }`}>
+      } ${!track.audio ? 'text-gray-400' : ''}`}>
         {title}
       </h3>
-      
       <p className={`text-sm truncate transition-colors ${
         isCurrentlyPlaying ? 'text-purple-200' : 'text-gray-400'
       }`}>
@@ -167,6 +104,10 @@ const MusicCard = ({ title, subtitle, image, track }) => {
       
       {isCurrentlyPlaying && (
         <div className="absolute top-2 left-2 w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+      )}
+
+      {!track.audio && (
+        <div className="absolute top-2 left-2 w-2 h-2 bg-gray-500 rounded-full"></div>
       )}
     </div>
   );
