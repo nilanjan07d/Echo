@@ -49,17 +49,26 @@ const HomePage = () => {
             <h2 className="text-xl font-bold mb-4">Your Vibe</h2>
             <div className="grid grid-cols-4 gap-4">
               {[
-                { title: "Ocean Eyes", subtitle: "Billie Eilish" },
-                { title: "Lose Yourself", subtitle: "Eminem" },
-                { title: "Shape of You", subtitle: "Ed Sheeran" },
-                { title: "Heat Waves", subtitle: "Glass Animals" },
-                { title: "Levitating", subtitle: "Dua Lipa" },
-                { title: "Starboy", subtitle: "The Weeknd ft. Daft Punk" },
-                { title: "Bad Guy", subtitle: "Billie Eilish" },
-                { title: "Sunflower", subtitle: "Post Malone & Swae Lee" }
+                { id: 1, title: "Ocean Eyes", subtitle: "Billie Eilish" },
+                { id: 2, title: "Lose Yourself", subtitle: "Eminem" },
+                { id: 3, title: "Shape of You", subtitle: "Ed Sheeran" },
+                { id: 4, title: "Heat Waves", subtitle: "Glass Animals" },
+                { id: 5, title: "Levitating", subtitle: "Dua Lipa" },
+                { id: 6, title: "Starboy", subtitle: "The Weeknd ft. Daft Punk" },
+                { id: 7, title: "Bad Guy", subtitle: "Billie Eilish" },
+                { id: 8, title: "Sunflower", subtitle: "Post Malone & Swae Lee" }
               ].map((card, i) => (
                 <div key={i} className="h-48">
-                  <MusicCard title={card.title} subtitle={card.subtitle} />
+                  <MusicCard 
+                    title={card.title} 
+                    subtitle={card.subtitle} 
+                    track={{
+                      id: card.id,
+                      title: card.title,
+                      artist: card.subtitle,
+                      // Add any other track properties your PlayerState needs
+                    }}
+                  />
                 </div>
               ))}
             </div>
